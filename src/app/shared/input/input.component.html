@@ -22,4 +22,10 @@
         Password must be at least 8 characters, must contain at least 1 uppercase letter, 1 lowercase letter, and 1
         number. Can contain special characters.
     </p>
+    <p *ngIf="control.errors?.['noMatch']" class="text-red-400">
+        Passwords do not match.
+    </p>
+    <p *ngIf="control.errors?.['emailTaken']" class="text-red-400">
+        Email taken. Please try another email.
+    </p>
 </ng-container>
