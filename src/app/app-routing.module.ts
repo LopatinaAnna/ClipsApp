@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'clip/:id', component: ClipComponent, resolve: { clip: ClipService } },
+  { path: '', loadChildren: async () => (await import('./video/video.module')).VideoModule },
   { path: '**', component: NotFoundComponent }
 ];
 
