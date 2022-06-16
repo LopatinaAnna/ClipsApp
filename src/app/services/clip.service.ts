@@ -11,6 +11,8 @@ import IClip from '../models/clip.model';
 export class ClipService {
 
   public clipsCollection: AngularFirestoreCollection<IClip>
+  pageClips: IClip[] = []
+  pendingRequest = false
 
   constructor(
     private db: AngularFirestore,
@@ -57,5 +59,38 @@ export class ClipService {
     await screenshotRef.delete()
 
     this.clipsCollection.doc(clip.docId).delete()
+  }
+
+  async getClips() {
+    if (this.pendingRequest) {
+      return
+    }
+
+    this.pendingRequest = true
+    let query = this.clipsCollection.ref.orderBy(
+      'timestamp', 'desc'
+    ).limit(3)
+
+    const { length } = this.pageClips
+
+    if (length) {
+      const lastDocID = this.pageClips[length - 1].docId
+      const lastDoc = await this.clipsCollection.doc(lastDocID)
+        .get()
+        .toPromise()
+
+      query = query.startAfter(lastDoc)
+    }
+
+    const snapshot = await query.get()
+
+    snapshot.forEach(doc => {
+      this.pageClips.push({
+        docId: doc.id,
+        ...doc.data()
+      })
+    })
+
+    this.pendingRequest = false
   }
 }
