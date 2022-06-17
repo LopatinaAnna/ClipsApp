@@ -142,8 +142,6 @@ export class UploadComponent implements OnDestroy {
 
         const clipDocRef = await this.clipService.createClip(clip)
 
-        console.log(clip)
-
         this.alertColor = 'green'
         this.alertMessage = 'Success! Your clip is now ready to share with the world.'
         this.showPercentage = false

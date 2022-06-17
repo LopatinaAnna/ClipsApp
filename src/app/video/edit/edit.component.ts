@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import IClip from 'src/app/models/clip.model';
 import { ClipService } from 'src/app/services/clip.service';
@@ -70,6 +70,7 @@ export class EditComponent implements OnInit, OnChanges, OnDestroy {
       this.alertMessage = 'Something went wrong. Please try again later.'
       this.inSubmission = false
       console.error(error)
+
       return
     }
 

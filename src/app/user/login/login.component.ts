@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   credentials = {
     email: '',
@@ -19,9 +18,6 @@ export class LoginComponent implements OnInit {
   inSubmission = false
 
   constructor(private auth: AngularFireAuth) { }
-
-  ngOnInit(): void {
-  }
 
   async loginSubmit() {
     this.showAlert = true
@@ -38,11 +34,9 @@ export class LoginComponent implements OnInit {
       this.inSubmission = false
       this.alertMessage = 'An unexpected error occured. Please try again later.'
       this.alertColor = 'red'
-
       console.error(e)
 
       return
-
     }
     this.alertMessage = 'Success! You are now logged in.'
     this.alertColor = 'green'

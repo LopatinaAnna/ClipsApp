@@ -10,7 +10,7 @@ export class FfmpegService {
   isReady = false
 
   constructor() {
-    this.ffmpeg = createFFmpeg({ log: true })
+    this.ffmpeg = createFFmpeg()
   }
 
   async init() {

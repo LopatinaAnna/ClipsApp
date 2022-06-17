@@ -37,8 +37,6 @@ export class ClipsListComponent implements OnInit, OnDestroy {
 
     if (bottomOfWindow) {
       this.clipService.getClips()
-      console.log('bottom')
     }
   }
-
 }

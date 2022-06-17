@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import IClip from 'src/app/models/clip.model';
 import { ClipService } from 'src/app/services/clip.service';
@@ -25,7 +25,7 @@ export class ManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe((params: ParamMap) => {
+    this.route.queryParamMap.subscribe(params => {
       this.sortOrder = params.get('sort') === '2' ? '2' : '1'
       this.sort$.next(this.sortOrder)
     })
@@ -42,7 +42,6 @@ export class ManageComponent implements OnInit {
 
   sort($event: Event) {
     const { value } = $event?.target as HTMLSelectElement
-    //this.router.navigateByUrl(`/manage?sort=${value}`)
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {

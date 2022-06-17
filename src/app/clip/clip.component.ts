@@ -29,5 +29,4 @@ export class ClipComponent implements OnInit {
       })
     })
   }
-
 }
